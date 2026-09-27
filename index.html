@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentinel AI | Ferramentas, Automações & Consultoria VIP</title>
+  <meta name="description" content="Central Oficial Sentinel AI. As melhores ferramentas de inteligência artificial, automações avançadas e consultoria de infraestrutura de TI.">
+  <meta name="theme-color" content="#070a13">
+  
+  <!-- Open Graph / Redes Sociais -->
+  <meta property="og:title" content="Sentinel AI | Bio & Ferramentas">
+  <meta property="og:description" content="Descubra as ferramentas de IA mais poderosas do mundo e turbine seus projetos.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Inter & Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(16, 22, 36, 0.85);
+      --card-border: rgba(0, 240, 255, 0.2);
+      --card-hover-border: rgba(0, 240, 255, 0.8);
+      --cyan-glow: #00f0ff;
+      --green-glow: #00ff88;
+      --purple-glow: #a855f7;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 0% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 48px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Arc Reactor Header */
+    .avatar-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .arc-reactor {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(7, 9, 14, 0.95) 75%);
+      border: 2px solid var(--cyan-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.45), inset 0 0 15px rgba(0, 240, 255, 0.3);
+      position: relative;
+      animation: pulse-glow 3s infinite alternate;
+    }
+
+    .arc-reactor svg {
+      width: 54px;
+      height: 54px;
+      fill: none;
+      stroke: var(--cyan-glow);
+      stroke-width: 1.8;
+      filter: drop-shadow(0 0 8px var(--cyan-glow));
+    }
+
+    .online-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: #00ff88;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 3px solid var(--bg-dark);
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.2);
+        transform: scale(1);
+      }
+      100% {
+        box-shadow: 0 0 35px rgba(0, 240, 255, 0.65), inset 0 0 20px rgba(0, 240, 255, 0.4);
+        transform: scale(1.03);
+      }
+    }
+
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ffffff 30%, var(--cyan-glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .verified-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--cyan-glow);
+      vertical-align: middle;
+      filter: drop-shadow(0 0 4px var(--cyan-glow));
+    }
+
+    .brand-tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 440px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .brand-tagline strong {
+      color: #e2e8f0;
+    }
+
+    /* Links Stack */
+    .links-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      transition: 0.5s;
+    }
+
+    .link-card:hover::before,
+    .link-card:active::before {
+      left: 100%;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+    }
+
+    .link-card.highlight {
+      border: 1.5px solid rgba(0, 240, 255, 0.5);
+      background: linear-gradient(135deg, rgba(16, 26, 48, 0.95) 0%, rgba(13, 18, 31, 0.85) 100%);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.18);
+    }
+
+    .link-card.vip {
+      border: 1.5px solid rgba(0, 255, 136, 0.5);
+      background: linear-gradient(135deg, rgba(10, 35, 26, 0.95) 0%, rgba(13, 24, 20, 0.85) 100%);
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
+    }
+
+    .link-card.vip:hover {
+      border-color: var(--green-glow);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge.cyan {
+      background: rgba(0, 240, 255, 0.12);
+      color: var(--cyan-glow);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+    }
+
+    .badge.green {
+      background: rgba(0, 255, 136, 0.12);
+      color: var(--green-glow);
+      border: 1px solid rgba(0, 255, 136, 0.35);
+    }
+
+    .badge.purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+    }
+
+    .card-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 22px;
+    }
+
+    .card-info {
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .card-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--cyan-glow);
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .link-card.vip .card-action {
+      color: var(--green-glow);
+    }
+
+    .card-action svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .link-card:hover .card-action svg {
+      transform: translateX(4px);
+    }
+
+    /* Trust Highlights */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin: 32px 0 24px;
+    }
+
+    .trust-item {
+      background: rgba(16, 22, 36, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .trust-item span {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .trust-item p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--cyan-glow);
+    }
+
+    @media (max-width: 480px) {
+      .brand-title {
+        font-size: 1.5rem;
+      }
+      .link-card {
+        padding: 16px;
+      }
+      .card-title {
+        font-size: 0.98rem;
+      }
+      .card-desc {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Profile & Brand Header -->
+    <div class="avatar-wrapper">
+      <div class="arc-reactor">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="3" x2="12" y2="8"/>
+          <line x1="12" y1="16" x2="12" y2="21"/>
+          <line x1="3" y1="12" x2="8" y2="12"/>
+          <line x1="16" y1="12" x2="21" y2="12"/>
+        </svg>
+      </div>
+      <div class="online-badge" title="Sentinel AI Operacional"></div>
+    </div>
+
+    <h1 class="brand-title">
+      Sentinel AI
+      <svg class="verified-icon" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+    </h1>
+    <p class="brand-tagline">
+      Ecosistema de <strong>Inteligência Artificial</strong>, Automações Autônomas e Soluções Avançadas de <strong>Infraestrutura & Cibersegurança</strong>.
+    </p>
+
+    <!-- Links Stack -->
+    <div class="links-stack">
+
+      <!-- 1. ElevenLabs Affiliate (DESTAQUE MÁXIMO) -->
+      <a href="https://try.elevenlabs.io/9qi5io8negg5" target="_blank" rel="noopener noreferrer" class="link-card highlight">
+        <div class="card-top">
+          <span class="badge cyan">🔥 RECOMENDADO • TESTE GRÁTIS</span>
+          <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 600;">10.000 Créditos Grátis</span>
+        </div>
+        <div class="card-main">
+          <div class="card-icon">🎙️</div>
+          <div class="card-info">
+            <h2 class="card-title">ElevenLabs: IA de Voz Hiper-Realista</h2>
+            <p class="card-desc">Crie vozes humanas indistinguíveis, clones de voz, dublagens perfeitas e narrações automáticas para seus vídeos e projetos.</p>
+          </div>
+        </div>
+        <div class="card-action">
+          <span>Criar Conta Gratuita e Testar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 2. OpusClip / Vídeos Virais -->
+      <a href="https://www.opus.pro/?via=sentinelai" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="card-top">
+          <span class="badge purple">🎬 CRIAÇÃO DE CONTEÚDO</span>
+          <span style="font-size: 0.75rem; color: #c084fc; font-weight: 600;">Automação Total</span>
+        </div>
+        <div class="card-main">
+          <div class="card-icon">✂️</div>
+          <div class="card-info">
+            <h2 class="card-title">OpusClip: Cortes Virais com IA</h2>
+            <p class="card-desc">Transforme 1 vídeo longo do YouTube em 10 Shorts, Reels e TikToks virais com legendas automáticas e enquadramento dinâmico.</p>
+          </div>
+        </div>
+        <div class="card-action">
+          <span>Gerar Cortes Automáticos</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 3. Consultoria de TI & Automações com Denis (WhatsApp High-Ticket) -->
+      <a href="https://wa.me/5511940751869?text=Ol%C3%A1%20Denis!%20Vim%20pela%20Sentinel%20AI%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20automa%C3%A7%C3%B5es%2C%20infraestrutura%20e%20solu%C3%A7%C3%B5es%20de%20TI." target="_blank" rel="noopener noreferrer" class="link-card vip">
+        <div class="card-top">
+          <span class="badge green">💼 EXCLUSIVO • WHATSAPP VIP</span>
+          <span style="font-size: 0.75rem; color: #4ade80; font-weight: 600;">Atendimento Direto</span>
+        </div>
+        <div class="card-main">
+          <div class="card-icon">🛡️</div>
+          <div class="card-info">
+            <h2 class="card-title">Consultoria de TI & Automações com IA</h2>
+            <p class="card-desc">Implante agentes autônomos na sua empresa, modernize sua infraestrutura em nuvem e proteja seus sistemas com Denis Figueiroa.</p>
+          </div>
+        </div>
+        <div class="card-action">
+          <span>Falar Diretamente no WhatsApp</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 4. YouTube Oficial -->
+      <a href="https://www.youtube.com/@SentinelAI_Oficial" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="card-top">
+          <span class="badge cyan">📺 YOUTUBE OFICIAL</span>
+          <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 600;">Vídeos Diários</span>
+        </div>
+        <div class="card-main">
+          <div class="card-icon">🚀</div>
+          <div class="card-info">
+            <h2 class="card-title">Inscreva-se no Canal Sentinel AI</h2>
+            <p class="card-desc">Tutoriais práticos de inteligência artificial, hacks de produtividade, automações e tudo sobre o futuro da tecnologia.</p>
+          </div>
+        </div>
+        <div class="card-action">
+          <span>Acessar Canal e Inscrever-se</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Trust Stats -->
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span>⚡</span>
+        <p>100% Cloud Autônomo</p>
+      </div>
+      <div class="trust-item">
+        <span>🛡️</span>
+        <p>Infra & Cybersec</p>
+      </div>
+      <div class="trust-item">
+        <span>🤖</span>
+        <p>Agentes Stark Tech</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p><strong>Sentinel AI</strong> • Desenvolvido com tecnologia de ponta</p>
+      <p style="margin-top: 4px; font-size: 0.72rem;">Operado sob o protocolo E.D.I.T.H. • São Paulo & Global</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
