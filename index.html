@@ -2,32 +2,32 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sentinel AI | Ferramentas, Automações & Consultoria VIP</title>
-  <meta name="description" content="Central Oficial Sentinel AI. As melhores ferramentas de inteligência artificial, automações avançadas e consultoria de infraestrutura de TI.">
-  <meta name="theme-color" content="#070a13">
-  
-  <!-- Open Graph / Redes Sociais -->
-  <meta property="og:title" content="Sentinel AI | Bio & Ferramentas">
-  <meta property="og:description" content="Descubra as ferramentas de IA mais poderosas do mundo e turbine seus projetos.">
-  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SENTINEL AI // CYBERNETIC DEFENSE & AUTONOMOUS SYSTEMS</title>
+  <meta name="description" content="Stark-Grade Autonomous Systems, Neural Audio Architecture & High-Performance Infrastructure Engineering.">
+  <meta name="theme-color" content="#02040a">
 
-  <!-- Google Fonts: Inter & Orbitron -->
+  <!-- Google Fonts: Orbitron, Share Tech Mono, Rajdhani -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-dark: #07090e;
-      --card-bg: rgba(16, 22, 36, 0.85);
-      --card-border: rgba(0, 240, 255, 0.2);
-      --card-hover-border: rgba(0, 240, 255, 0.8);
-      --cyan-glow: #00f0ff;
-      --green-glow: #00ff88;
-      --purple-glow: #a855f7;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
+      --bg-void: #020409;
+      --bg-panel: rgba(6, 11, 22, 0.85);
+      --border-hud: rgba(0, 240, 255, 0.25);
+      --border-hud-active: #00f0ff;
+      --cyan: #00f0ff;
+      --cyan-dim: rgba(0, 240, 255, 0.15);
+      --amber: #ffaa00;
+      --emerald: #00ff88;
+      --crimson: #ff0055;
+      --text-bright: #ffffff;
+      --text-muted: #809bb3;
+      --font-hud: 'Orbitron', monospace;
+      --font-tech: 'Rajdhani', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
     }
 
     * {
@@ -35,482 +35,871 @@
       padding: 0;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     body {
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 0% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 40%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-void);
+      color: var(--text-bright);
+      font-family: var(--font-tech);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 16px 48px;
+      padding: 24px 14px 60px;
+      position: relative;
+      overflow-x: hidden;
+      cursor: crosshair;
     }
 
-    .container {
+    /* Interactive Background Radar Canvas */
+    #radar-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    /* CRT Scanline & Vignette Effect */
+    .crt-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                  radial-gradient(circle at center, transparent 65%, rgba(0, 0, 0, 0.8) 100%);
+      background-size: 100% 3px, 100% 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Container HUD Frame */
+    .hud-frame {
       width: 100%;
-      max-width: 580px;
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Arc Reactor Header */
-    .avatar-wrapper {
-      position: relative;
+    /* Top HUD Status Bar */
+    .hud-topbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      color: var(--cyan);
+      padding: 8px 12px;
+      border: 1px solid var(--border-hud);
+      background: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(10px);
       margin-bottom: 20px;
+      position: relative;
     }
 
-    .arc-reactor {
-      width: 100px;
-      height: 100px;
+    .hud-topbar::before, .hud-topbar::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--cyan);
+    }
+    .hud-topbar::before { top: -3px; left: -3px; }
+    .hud-topbar::after { bottom: -3px; right: -3px; }
+
+    .telemetry-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(7, 9, 14, 0.95) 75%);
-      border: 2px solid var(--cyan-glow);
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .audio-toggle {
+      background: transparent;
+      border: 1px solid var(--border-hud);
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 3px 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .audio-toggle:hover {
+      background: var(--cyan-dim);
+      border-color: var(--cyan);
+    }
+
+    /* Core Holographic Reactor Header */
+    .core-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .reactor-box {
+      width: 90px;
+      height: 90px;
+      position: relative;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.45), inset 0 0 15px rgba(0, 240, 255, 0.3);
-      position: relative;
-      animation: pulse-glow 3s infinite alternate;
     }
 
-    .arc-reactor svg {
-      width: 54px;
-      height: 54px;
-      fill: none;
-      stroke: var(--cyan-glow);
-      stroke-width: 1.8;
-      filter: drop-shadow(0 0 8px var(--cyan-glow));
-    }
-
-    .online-badge {
+    .reactor-outer-ring {
       position: absolute;
-      bottom: 2px;
-      right: 2px;
-      background: #00ff88;
-      width: 16px;
-      height: 16px;
+      inset: 0;
       border-radius: 50%;
-      border: 3px solid var(--bg-dark);
-      box-shadow: 0 0 10px #00ff88;
+      border: 2px dashed var(--cyan);
+      animation: rotate-cw 18s linear infinite;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
     }
 
-    @keyframes pulse-glow {
-      0% {
-        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.2);
-        transform: scale(1);
-      }
-      100% {
-        box-shadow: 0 0 35px rgba(0, 240, 255, 0.65), inset 0 0 20px rgba(0, 240, 255, 0.4);
-        transform: scale(1.03);
-      }
+    .reactor-inner-ring {
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 255, 136, 0.4);
+      border-top-color: var(--emerald);
+      animation: rotate-ccw 10s linear infinite;
     }
 
-    .brand-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.75rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #ffffff 30%, var(--cyan-glow) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
+    .reactor-core-symbol {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.8) 0%, rgba(2, 6, 23, 0.95) 80%);
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--cyan);
     }
 
-    .verified-icon {
-      width: 20px;
-      height: 20px;
-      fill: var(--cyan-glow);
-      vertical-align: middle;
-      filter: drop-shadow(0 0 4px var(--cyan-glow));
+    .reactor-core-symbol svg {
+      width: 24px;
+      height: 24px;
+      stroke: #fff;
+      stroke-width: 2;
+      fill: none;
+      filter: drop-shadow(0 0 4px var(--cyan));
     }
 
-    .brand-tagline {
+    @keyframes rotate-cw { 100% { transform: rotate(360deg); } }
+    @keyframes rotate-ccw { 100% { transform: rotate(-360deg); } }
+
+    .brand-title {
+      font-family: var(--font-hud);
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+      position: relative;
+    }
+
+    .operator-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--amber);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .system-desc {
       font-size: 0.95rem;
+      font-weight: 500;
       color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.45;
       text-align: center;
-      max-width: 440px;
-      line-height: 1.5;
-      margin-bottom: 28px;
     }
 
-    .brand-tagline strong {
-      color: #e2e8f0;
-    }
-
-    /* Links Stack */
-    .links-stack {
+    /* Grid of Execution Modules */
+    .modules-container {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .link-card {
-      display: flex;
-      flex-direction: column;
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
+    .module-card {
+      position: relative;
+      display: block;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
       padding: 18px 20px;
       text-decoration: none;
       color: inherit;
-      position: relative;
+      backdrop-filter: blur(14px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .link-card::before {
+    /* Cybernetic Corner Calipers */
+    .module-card::before, .module-card::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-      transition: 0.5s;
+      width: 8px;
+      height: 8px;
+      border-color: var(--cyan);
+      border-style: solid;
+      pointer-events: none;
+      transition: all 0.2s;
+    }
+    .module-card::before {
+      top: -1px; left: -1px;
+      border-width: 2px 0 0 2px;
+    }
+    .module-card::after {
+      bottom: -1px; right: -1px;
+      border-width: 0 2px 2px 0;
     }
 
-    .link-card:hover::before,
-    .link-card:active::before {
-      left: 100%;
+    .module-card:hover {
+      border-color: var(--cyan);
+      transform: translateX(4px);
+      background: rgba(8, 18, 36, 0.9);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.08);
     }
 
-    .link-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--card-hover-border);
-      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+    .module-card:hover::before, .module-card:hover::after {
+      width: 14px;
+      height: 14px;
+      border-color: #fff;
     }
 
-    .link-card.highlight {
-      border: 1.5px solid rgba(0, 240, 255, 0.5);
-      background: linear-gradient(135deg, rgba(16, 26, 48, 0.95) 0%, rgba(13, 18, 31, 0.85) 100%);
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.18);
+    /* Highlight Variant (ElevenLabs Prime) */
+    .module-card.prime {
+      border-color: rgba(0, 240, 255, 0.5);
+      background: linear-gradient(90deg, rgba(3, 18, 38, 0.9) 0%, rgba(5, 12, 26, 0.85) 100%);
     }
 
-    .link-card.vip {
-      border: 1.5px solid rgba(0, 255, 136, 0.5);
-      background: linear-gradient(135deg, rgba(10, 35, 26, 0.95) 0%, rgba(13, 24, 20, 0.85) 100%);
-      box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
+    /* VIP Green Variant (WhatsApp Direct) */
+    .module-card.vip {
+      border-color: rgba(0, 255, 136, 0.35);
+    }
+    .module-card.vip::before, .module-card.vip::after { border-color: var(--emerald); }
+    .module-card.vip:hover {
+      border-color: var(--emerald);
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.25), inset 0 0 15px rgba(0, 255, 136, 0.08);
     }
 
-    .link-card.vip:hover {
-      border-color: var(--green-glow);
-      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-    }
-
-    .card-top {
+    .module-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
     }
 
-    .badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
+    .module-id {
+      color: var(--cyan);
       letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
     }
 
-    .badge.cyan {
-      background: rgba(0, 240, 255, 0.12);
-      color: var(--cyan-glow);
-      border: 1px solid rgba(0, 240, 255, 0.35);
+    .module-status {
+      padding: 2px 8px;
+      border: 1px solid currentColor;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
     }
 
-    .badge.green {
-      background: rgba(0, 255, 136, 0.12);
-      color: var(--green-glow);
-      border: 1px solid rgba(0, 255, 136, 0.35);
-    }
+    .module-card.prime .module-status { color: var(--cyan); }
+    .module-card.vip .module-status { color: var(--emerald); }
+    .module-card.neutral .module-status { color: var(--text-muted); }
 
-    .badge.purple {
-      background: rgba(168, 85, 247, 0.12);
-      color: #c084fc;
-      border: 1px solid rgba(168, 85, 247, 0.35);
-    }
-
-    .card-main {
+    .module-body {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+    .module-icon-bay {
+      width: 46px;
+      height: 46px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 22px;
+      position: relative;
     }
 
-    .card-info {
+    .module-icon-bay svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--cyan);
+      stroke-width: 1.8;
+      fill: none;
+      transition: all 0.2s;
+    }
+
+    .module-card.vip .module-icon-bay svg { stroke: var(--emerald); }
+
+    .module-card:hover .module-icon-bay svg {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    .module-text-bay {
       flex: 1;
     }
 
-    .card-title {
+    .module-title {
+      font-family: var(--font-hud);
       font-size: 1.05rem;
       font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 3px;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .card-desc {
-      font-size: 0.82rem;
+    .scramble-text {
+      display: inline-block;
+    }
+
+    .action-arrow {
+      width: 18px;
+      height: 18px;
+      stroke: var(--cyan);
+      stroke-width: 2;
+      fill: none;
+      transition: transform 0.2s;
+    }
+
+    .module-card:hover .action-arrow {
+      transform: translateX(6px);
+    }
+
+    .module-desc {
+      font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.4;
-    }
-
-    .card-action {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--cyan-glow);
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .link-card.vip .card-action {
-      color: var(--green-glow);
-    }
-
-    .card-action svg {
-      width: 14px;
-      height: 14px;
-      transition: transform 0.2s ease;
-    }
-
-    .link-card:hover .card-action svg {
-      transform: translateX(4px);
-    }
-
-    /* Trust Highlights */
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      width: 100%;
-      margin: 32px 0 24px;
-    }
-
-    .trust-item {
-      background: rgba(16, 22, 36, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 12px 8px;
-      text-align: center;
-    }
-
-    .trust-item span {
-      display: block;
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-    }
-
-    .trust-item p {
-      font-size: 0.72rem;
-      color: var(--text-muted);
       font-weight: 500;
     }
 
-    /* Footer */
+    .module-footer-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .module-footer-bar span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Live Interactive Terminal Console */
+    .terminal-section {
+      width: 100%;
+      margin: 28px 0 20px;
+      background: rgba(2, 6, 14, 0.95);
+      border: 1px solid var(--border-hud);
+      position: relative;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(0, 240, 255, 0.08);
+      border-bottom: 1px solid var(--border-hud);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--cyan);
+      letter-spacing: 1px;
+    }
+
+    .terminal-body {
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      max-height: 110px;
+      overflow-y: auto;
+    }
+
+    .terminal-line.success { color: var(--emerald); }
+    .terminal-line.highlight { color: var(--cyan); }
+    .terminal-line.alert { color: var(--amber); }
+
+    .terminal-controls {
+      display: flex;
+      gap: 6px;
+      padding: 8px 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .terminal-cmd-btn {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid var(--border-hud);
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .terminal-cmd-btn:hover {
+      background: var(--cyan);
+      color: #000;
+    }
+
+    /* Footer Telemetry */
     footer {
+      width: 100%;
       text-align: center;
-      font-size: 0.78rem;
-      color: #64748b;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
       margin-top: 16px;
       line-height: 1.6;
     }
 
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
+    footer span.highlight {
+      color: var(--cyan);
+      font-weight: 600;
     }
 
-    footer a:hover {
-      color: var(--cyan-glow);
+    /* Toast HUD */
+    .hud-toast {
+      position: fixed;
+      bottom: 24px;
+      background: rgba(3, 10, 24, 0.95);
+      border: 1px solid var(--cyan);
+      padding: 10px 24px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--cyan);
+      letter-spacing: 1px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.25s ease;
+      z-index: 100;
+      pointer-events: none;
     }
 
-    @media (max-width: 480px) {
-      .brand-title {
-        font-size: 1.5rem;
-      }
-      .link-card {
-        padding: 16px;
-      }
-      .card-title {
-        font-size: 0.98rem;
-      }
-      .card-desc {
-        font-size: 0.78rem;
-      }
+    .hud-toast.active {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    
-    <!-- Profile & Brand Header -->
-    <div class="avatar-wrapper">
-      <div class="arc-reactor">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="9"/>
-          <circle cx="12" cy="12" r="4"/>
-          <line x1="12" y1="3" x2="12" y2="8"/>
-          <line x1="12" y1="16" x2="12" y2="21"/>
-          <line x1="3" y1="12" x2="8" y2="12"/>
-          <line x1="16" y1="12" x2="21" y2="12"/>
-        </svg>
+  <!-- Background Radar / Particle Canvas -->
+  <canvas id="radar-canvas"></canvas>
+
+  <!-- CRT Visual Filter -->
+  <div class="crt-overlay"></div>
+
+  <div class="hud-frame">
+
+    <!-- Top Telemetry Bar -->
+    <div class="hud-topbar">
+      <div class="telemetry-item">
+        <span class="live-dot"></span>
+        <span>SENTINEL PROTOCOL // DEFENSE LEVEL: ALPHA</span>
       </div>
-      <div class="online-badge" title="Sentinel AI Operacional"></div>
+      <button class="audio-toggle" id="audio-btn" onclick="toggleAudioEngine()">
+        <span>AUDIO:</span> <strong id="audio-state">SYNTH ON</strong>
+      </button>
     </div>
 
-    <h1 class="brand-title">
-      Sentinel AI
-      <svg class="verified-icon" viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-      </svg>
-    </h1>
-    <p class="brand-tagline">
-      Ecosistema de <strong>Inteligência Artificial</strong>, Automações Autônomas e Soluções Avançadas de <strong>Infraestrutura & Cibersegurança</strong>.
-    </p>
-
-    <!-- Links Stack -->
-    <div class="links-stack">
-
-      <!-- 1. ElevenLabs Affiliate (DESTAQUE MÁXIMO) -->
-      <a href="https://try.elevenlabs.io/9qi5io8negg5" target="_blank" rel="noopener noreferrer" class="link-card highlight">
-        <div class="card-top">
-          <span class="badge cyan">🔥 RECOMENDADO • TESTE GRÁTIS</span>
-          <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 600;">10.000 Créditos Grátis</span>
+    <!-- Stark Arc Core Header -->
+    <header class="core-header">
+      <div class="reactor-box">
+        <div class="reactor-outer-ring"></div>
+        <div class="reactor-inner-ring"></div>
+        <div class="reactor-core-symbol">
+          <svg viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+          </svg>
         </div>
-        <div class="card-main">
-          <div class="card-icon">🎙️</div>
-          <div class="card-info">
-            <h2 class="card-title">ElevenLabs: IA de Voz Hiper-Realista</h2>
-            <p class="card-desc">Crie vozes humanas indistinguíveis, clones de voz, dublagens perfeitas e narrações automáticas para seus vídeos e projetos.</p>
-          </div>
-        </div>
-        <div class="card-action">
-          <span>Criar Conta Gratuita e Testar</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- 2. OpusClip / Vídeos Virais -->
-      <a href="https://www.opus.pro/?via=sentinelai" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="card-top">
-          <span class="badge purple">🎬 CRIAÇÃO DE CONTEÚDO</span>
-          <span style="font-size: 0.75rem; color: #c084fc; font-weight: 600;">Automação Total</span>
-        </div>
-        <div class="card-main">
-          <div class="card-icon">✂️</div>
-          <div class="card-info">
-            <h2 class="card-title">OpusClip: Cortes Virais com IA</h2>
-            <p class="card-desc">Transforme 1 vídeo longo do YouTube em 10 Shorts, Reels e TikToks virais com legendas automáticas e enquadramento dinâmico.</p>
-          </div>
-        </div>
-        <div class="card-action">
-          <span>Gerar Cortes Automáticos</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- 3. Consultoria de TI & Automações com Denis (WhatsApp High-Ticket) -->
-      <a href="https://wa.me/5511940751869?text=Ol%C3%A1%20Denis!%20Vim%20pela%20Sentinel%20AI%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20automa%C3%A7%C3%B5es%2C%20infraestrutura%20e%20solu%C3%A7%C3%B5es%20de%20TI." target="_blank" rel="noopener noreferrer" class="link-card vip">
-        <div class="card-top">
-          <span class="badge green">💼 EXCLUSIVO • WHATSAPP VIP</span>
-          <span style="font-size: 0.75rem; color: #4ade80; font-weight: 600;">Atendimento Direto</span>
-        </div>
-        <div class="card-main">
-          <div class="card-icon">🛡️</div>
-          <div class="card-info">
-            <h2 class="card-title">Consultoria de TI & Automações com IA</h2>
-            <p class="card-desc">Implante agentes autônomos na sua empresa, modernize sua infraestrutura em nuvem e proteja seus sistemas com Denis Figueiroa.</p>
-          </div>
-        </div>
-        <div class="card-action">
-          <span>Falar Diretamente no WhatsApp</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- 4. YouTube Oficial -->
-      <a href="https://www.youtube.com/@SentinelAI_Oficial" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="card-top">
-          <span class="badge cyan">📺 YOUTUBE OFICIAL</span>
-          <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 600;">Vídeos Diários</span>
-        </div>
-        <div class="card-main">
-          <div class="card-icon">🚀</div>
-          <div class="card-info">
-            <h2 class="card-title">Inscreva-se no Canal Sentinel AI</h2>
-            <p class="card-desc">Tutoriais práticos de inteligência artificial, hacks de produtividade, automações e tudo sobre o futuro da tecnologia.</p>
-          </div>
-        </div>
-        <div class="card-action">
-          <span>Acessar Canal e Inscrever-se</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-    </div>
-
-    <!-- Trust Stats -->
-    <div class="trust-grid">
-      <div class="trust-item">
-        <span>⚡</span>
-        <p>100% Cloud Autônomo</p>
       </div>
-      <div class="trust-item">
-        <span>🛡️</span>
-        <p>Infra & Cybersec</p>
-      </div>
-      <div class="trust-item">
-        <span>🤖</span>
-        <p>Agentes Stark Tech</p>
-      </div>
-    </div>
+      <h1 class="brand-title scramble-target" data-value="SENTINEL AI">SENTINEL AI</h1>
+      <div class="operator-tag">[ OPERATOR: CLASSIFIED // STARK DEFENSE PROTOCOL ]</div>
+      <p class="system-desc">
+        Arquitetura de Sistemas Autônomos, Engenharia de Voz Neural e Infraestrutura Cloud de Alta Resiliência.
+      </p>
+    </header>
 
-    <!-- Footer -->
+    <!-- Execution Modules Stack -->
+    <main class="modules-container">
+
+      <!-- MODULE 01: ELEVENLABS (VOICE ENGINE) -->
+      <a href="https://try.elevenlabs.io/9qi5io8negg5" target="_blank" rel="noopener noreferrer" 
+         class="module-card prime" onmouseenter="playBeep(880, 0.04)" onclick="playConfirmBeep()">
+        <div class="module-header">
+          <span class="module-id">// MOD_01: NEURAL_VOICE_CORE</span>
+          <span class="module-status">OFFICIAL PARTNER // 10K CREDITS</span>
+        </div>
+        <div class="module-body">
+          <div class="module-icon-bay">
+            <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <div class="module-text-bay">
+            <h2 class="module-title">
+              <span class="scramble-hover" data-value="ElevenLabs AI Engine">ElevenLabs AI Engine</span>
+              <svg class="action-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </h2>
+            <p class="module-desc">
+              Clonagem vocal neural de latência ultra-baixa e síntese cinematográfica em 29 idiomas. O motor de voz usado pelas maiores IAs do mundo.
+            </p>
+          </div>
+        </div>
+        <div class="module-footer-bar">
+          <span>LATENCY: &lt;280ms</span>
+          <span>•</span>
+          <span>SAMPLING: 44.1kHz PCM</span>
+          <span>•</span>
+          <span>EXECUTE FREE UPLINK ➔</span>
+        </div>
+      </a>
+
+      <!-- MODULE 02: OPUSCLIP (VIRAL PIPELINE) -->
+      <a href="https://www.opus.pro/?via=sentinelai" target="_blank" rel="noopener noreferrer" 
+         class="module-card" onmouseenter="playBeep(720, 0.03)" onclick="playConfirmBeep()">
+        <div class="module-header">
+          <span class="module-id">// MOD_02: VIDEO_STREAM_SYNTHESIZER</span>
+          <span class="module-status">AUTONOMOUS PIPELINE</span>
+        </div>
+        <div class="module-body">
+          <div class="module-icon-bay">
+            <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <div class="module-text-bay">
+            <h2 class="module-title">
+              <span class="scramble-hover" data-value="OpusClip Video Automation">OpusClip Video Automation</span>
+              <svg class="action-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </h2>
+            <p class="module-desc">
+              Pipeline gerativo que fragmenta vídeos longos em dezenas de Shorts virais com auto-reframe, legendagem dinâmica e pontuação algorítmica.
+            </p>
+          </div>
+        </div>
+        <div class="module-footer-bar">
+          <span>PROCESSING: 10x SPEED</span>
+          <span>•</span>
+          <span>AUTO-HOOK DETECTION</span>
+          <span>•</span>
+          <span>ACCESS PIPELINE ➔</span>
+        </div>
+      </a>
+
+      <!-- MODULE 03: WHATSAPP VIP (DIRECT ARCHITECT UPLINK) -->
+      <a href="https://wa.me/5511940751869?text=Ol%C3%A1!%20Acessei%20o%20terminal%20Sentinel%20AI%20e%20gostaria%20de%20iniciar%20um%20projeto%20de%20automa%C3%A7%C3%A3o%20e%20consultoria%20de%20infraestrutura." 
+         target="_blank" rel="noopener noreferrer" class="module-card vip" onmouseenter="playBeep(960, 0.04)" onclick="playConfirmBeep()">
+        <div class="module-header">
+          <span class="module-id" style="color: var(--emerald);">// MOD_03: ENCRYPTED_DIRECT_UPLINK</span>
+          <span class="module-status">HIGH-TICKET CONSULTING</span>
+        </div>
+        <div class="module-body">
+          <div class="module-icon-bay">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="module-text-bay">
+            <h2 class="module-title">
+              <span class="scramble-hover" data-value="Consultoria de TI // Sentinel Core">Consultoria de TI // Sentinel Core</span>
+              <svg class="action-arrow" viewBox="0 0 24 24" style="stroke: var(--emerald);"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </h2>
+            <p class="module-desc">
+              Canal executivo direto para implantação de agentes de IA, automações autônomas, modernização de ambientes cloud (AWS/Azure) e segurança de infraestrutura.
+            </p>
+          </div>
+        </div>
+        <div class="module-footer-bar">
+          <span style="color: var(--emerald);">SLA: RESPOSTA PRIORITÁRIA</span>
+          <span>•</span>
+          <span>WHATSAPP END-TO-END</span>
+          <span>•</span>
+          <span style="color: var(--emerald);">INITIATE UPLINK ➔</span>
+        </div>
+      </a>
+
+      <!-- MODULE 04: YOUTUBE SATELLITE -->
+      <a href="https://www.youtube.com/@SentinelAI_Oficial" target="_blank" rel="noopener noreferrer" 
+         class="module-card neutral" onmouseenter="playBeep(640, 0.03)" onclick="playConfirmBeep()">
+        <div class="module-header">
+          <span class="module-id">// MOD_04: BROADCAST_FEED</span>
+          <span class="module-status">DAILY DISPATCHES</span>
+        </div>
+        <div class="module-body">
+          <div class="module-icon-bay">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </div>
+          <div class="module-text-bay">
+            <h2 class="module-title">
+              <span class="scramble-hover" data-value="YouTube // @SentinelAI_Oficial">YouTube // @SentinelAI_Oficial</span>
+              <svg class="action-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </h2>
+            <p class="module-desc">
+              Canal oficial com tutoriais técnicos de engenharia reversa de IA, automações em nuvem e demonstrações práticas da esteira Sentinel.
+            </p>
+          </div>
+        </div>
+        <div class="module-footer-bar">
+          <span>SCHEDULE: 08:00 // 12:30 // 18:30</span>
+          <span>•</span>
+          <span>SUBSCRIBE FEED ➔</span>
+        </div>
+      </a>
+
+    </main>
+
+    <!-- Interactive Terminal Command Console -->
+    <section class="terminal-section">
+      <div class="terminal-header">
+        <span>JARVIS // STARK TERMINAL CONSOLE v4.8</span>
+        <span>SEC_SYS_ONLINE</span>
+      </div>
+      <div class="terminal-body" id="term-log">
+        <div class="terminal-line highlight">[STARK-CORE]: Inicializando subsistemas do Sentinel AI...</div>
+        <div class="terminal-line success">[AUTH]: Conectado ao cluster com sucesso. Criptografia SHA-256 ativa.</div>
+        <div class="terminal-line">[TELEMETRY]: 16 nós de vídeo sincronizados na nuvem do Google.</div>
+        <div class="terminal-line success">[STATUS]: Todos os 4 módulos operando em capacidade total.</div>
+      </div>
+      <div class="terminal-controls">
+        <button class="terminal-cmd-btn" onclick="executeTermCmd('ping')">&gt; PING NODES</button>
+        <button class="terminal-cmd-btn" onclick="executeTermCmd('status')">&gt; CHECK UPTIME</button>
+        <button class="terminal-cmd-btn" onclick="copyConsoleLink()">&gt; COPY SECURE URL</button>
+      </div>
+    </section>
+
+    <!-- Footer Identity -->
     <footer>
-      <p><strong>Sentinel AI</strong> • Desenvolvido com tecnologia de ponta</p>
-      <p style="margin-top: 4px; font-size: 0.72rem;">Operado sob o protocolo E.D.I.T.H. • São Paulo & Global</p>
+      <p>ARCHITECTED UNDER <span class="highlight">E.D.I.T.H. PROTOCOL</span> // STARK INDUSTRIES GRADE</p>
+      <p style="margin-top: 4px; font-size: 0.65rem; color: #475569;">
+        HOSTED ON DISTRIBUTED ZERO-TRUST REPO • AUTONOMOUS ARCHITECTURE
+      </p>
     </footer>
 
   </div>
+
+  <!-- HUD Toast Feedback -->
+  <div id="hud-toast" class="hud-toast">
+    <span style="color: var(--emerald);">[OK]</span>
+    <span id="toast-text">URL COPIADA COM SUCESSO</span>
+  </div>
+
+  <script>
+    // --- SYNTHESIZED WEB AUDIO API (JARVIS / STARK HUD SOUNDS) ---
+    let audioCtx = null;
+    let audioEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playBeep(freq = 800, duration = 0.05, type = 'sine') {
+      if (!audioEnabled) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playConfirmBeep() {
+      if (!audioEnabled) return;
+      playBeep(1200, 0.06, 'triangle');
+      setTimeout(() => playBeep(1800, 0.08, 'sine'), 60);
+    }
+
+    function toggleAudioEngine() {
+      audioEnabled = !audioEnabled;
+      const stateEl = document.getElementById('audio-state');
+      stateEl.innerText = audioEnabled ? 'SYNTH ON' : 'MUTED';
+      stateEl.style.color = audioEnabled ? 'var(--cyan)' : 'var(--crimson)';
+      if (audioEnabled) playConfirmBeep();
+    }
+
+    // --- INTERACTIVE RADAR PARTICLES CANVAS ---
+    const canvas = document.getElementById('radar-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    let mouse = { x: -1000, y: -1000 };
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    for (let i = 0; i < 45; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 2 + 1
+      });
+    }
+
+    function drawRadar() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Connect nodes near mouse
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.4)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Distance to mouse
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          ctx.strokeStyle = `rgba(0, 240, 255, ${0.35 * (1 - dist / 140)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(drawRadar);
+    }
+    drawRadar();
+
+    // --- CYBERNETIC TEXT SCRAMBLE DECODE EFFECT ---
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#%&*//";
+
+    function scrambleElement(el) {
+      const original = el.getAttribute('data-value') || el.innerText;
+      let iteration = 0;
+      clearInterval(el.interval);
+
+      el.interval = setInterval(() => {
+        el.innerText = original.split("").map((char, index) => {
+          if (index < iteration) return original[index];
+          return letters[Math.floor(Math.random() * letters.length)];
+        }).join("");
+
+        if (iteration >= original.length) {
+          clearInterval(el.interval);
+        }
+        iteration += 1 / 2;
+      }, 25);
+    }
+
+    document.querySelectorAll('.scramble-hover').forEach(el => {
+      el.addEventListener('mouseenter', () => scrambleElement(el));
+    });
+
+    const mainTitle = document.querySelector('.scramble-target');
+    if (mainTitle) scrambleElement(mainTitle);
+
+    // --- TERMINAL COMMAND CONSOLE ---
+    function executeTermCmd(cmd) {
+      playConfirmBeep();
+      const log = document.getElementById('term-log');
+      const time = new Date().toLocaleTimeString();
+
+      if (cmd === 'ping') {
+        log.innerHTML += `<div class="terminal-line">[${time}] &gt; PINGING GOOGLE API CLUSTER... LATENCY: 11.4ms (PERFECT)</div>`;
+      } else if (cmd === 'status') {
+        log.innerHTML += `<div class="terminal-line success">[${time}] &gt; STARK ARCHITECTURE OPERATIONAL // 0 MEMORY LEAKS // 100% UPTIME</div>`;
+      }
+      log.scrollTop = log.scrollHeight;
+    }
+
+    // --- COPY SECURE URL ACTION ---
+    function copyConsoleLink() {
+      playConfirmBeep();
+      const url = "https://sentinelaioficial-dev.github.io/";
+      navigator.clipboard.writeText(url).then(() => {
+        const toast = document.getElementById('hud-toast');
+        toast.classList.add('active');
+        const log = document.getElementById('term-log');
+        log.innerHTML += `<div class="terminal-line alert">[LINK]: URL corporativa copiada com sucesso para o clipboard.</div>`;
+        log.scrollTop = log.scrollHeight;
+        setTimeout(() => toast.classList.remove('active'), 2500);
+      });
+    }
+  </script>
 
 </body>
 </html>
