@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>SENTINEL AI // CYBERNETIC DEFENSE & AUTONOMOUS SYSTEMS</title>
   <meta name="description" content="Stark-Grade Autonomous Systems, Neural Audio Architecture & High-Performance Infrastructure Engineering.">
-  <meta name="theme-color" content="#02040a">
+  <meta name="theme-color" content="#020409">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SENTINEL AI // CYBERNETIC CORE">
+  <meta property="og:description" content="Autonomous AI Systems & Enterprise Cloud Infrastructure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sentinelaioficial-dev.github.io/">
 
   <!-- Google Fonts: Orbitron, Share Tech Mono, Rajdhani -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -264,6 +270,7 @@
       backdrop-filter: blur(14px);
       transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
+      cursor: pointer;
     }
 
     /* Cybernetic Corner Calipers */
@@ -305,7 +312,7 @@
       background: linear-gradient(90deg, rgba(3, 18, 38, 0.9) 0%, rgba(5, 12, 26, 0.85) 100%);
     }
 
-    /* VIP Green Variant (WhatsApp Direct) */
+    /* Emerald Variant (Direct Dispatch) */
     .module-card.vip {
       border-color: rgba(0, 255, 136, 0.35);
     }
@@ -389,10 +396,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-
-    .scramble-text {
-      display: inline-block;
     }
 
     .action-arrow {
@@ -535,6 +538,143 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* STARK DISPATCH MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 4, 9, 0.88);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dispatch-window {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(6, 12, 24, 0.96);
+      border: 1.5px solid var(--cyan);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.35);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.open .dispatch-window {
+      transform: scale(1);
+    }
+
+    .dispatch-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: rgba(0, 240, 255, 0.1);
+      border-bottom: 1px solid var(--border-hud);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--cyan);
+      letter-spacing: 1px;
+    }
+
+    .close-modal-btn {
+      background: transparent;
+      border: none;
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .close-modal-btn:hover {
+      color: #fff;
+    }
+
+    .dispatch-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-family: var(--font-tech);
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--cyan);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .field-input, .field-select, .field-textarea {
+      width: 100%;
+      background: rgba(2, 6, 14, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: #fff;
+      font-family: var(--font-tech);
+      font-size: 0.95rem;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field-input:focus, .field-select:focus, .field-textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+    }
+
+    .field-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .dispatch-submit-btn {
+      width: 100%;
+      background: rgba(0, 240, 255, 0.12);
+      border: 1.5px solid var(--cyan);
+      color: var(--cyan);
+      font-family: var(--font-hud);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      margin-top: 6px;
+    }
+
+    .dispatch-submit-btn:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+    }
+
+    .dispatch-submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
@@ -641,35 +781,34 @@
         </div>
       </a>
 
-      <!-- MODULE 03: WHATSAPP VIP (DIRECT ARCHITECT UPLINK) -->
-      <a href="https://wa.me/5511940751869?text=Ol%C3%A1!%20Acessei%20o%20terminal%20Sentinel%20AI%20e%20gostaria%20de%20iniciar%20um%20projeto%20de%20automa%C3%A7%C3%A3o%20e%20consultoria%20de%20infraestrutura." 
-         target="_blank" rel="noopener noreferrer" class="module-card vip" onmouseenter="playBeep(960, 0.04)" onclick="playConfirmBeep()">
+      <!-- MODULE 03: ENCRYPTED DISPATCH TO SENTINELAI.OFICIAL@GMAIL.COM -->
+      <div class="module-card vip" onmouseenter="playBeep(960, 0.04)" onclick="openDispatchModal()">
         <div class="module-header">
-          <span class="module-id" style="color: var(--emerald);">// MOD_03: ENCRYPTED_DIRECT_UPLINK</span>
-          <span class="module-status">HIGH-TICKET CONSULTING</span>
+          <span class="module-id" style="color: var(--emerald);">// MOD_03: SECURE_DISPATCH_UPLINK</span>
+          <span class="module-status">TRANSMIT BRIEFING</span>
         </div>
         <div class="module-body">
           <div class="module-icon-bay">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
           <div class="module-text-bay">
             <h2 class="module-title">
-              <span class="scramble-hover" data-value="Consultoria de TI // Sentinel Core">Consultoria de TI // Sentinel Core</span>
+              <span class="scramble-hover" data-value="Contratar Projetos & Consultoria">Contratar Projetos & Consultoria</span>
               <svg class="action-arrow" viewBox="0 0 24 24" style="stroke: var(--emerald);"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </h2>
             <p class="module-desc">
-              Canal executivo direto para implantação de agentes de IA, automações autônomas, modernização de ambientes cloud (AWS/Azure) e segurança de infraestrutura.
+              Transmita um briefing confidencial de arquitetura de IA, infraestrutura cloud (AWS/Azure) ou segurança diretamente para a central do Sentinel AI.
             </p>
           </div>
         </div>
         <div class="module-footer-bar">
-          <span style="color: var(--emerald);">SLA: RESPOSTA PRIORITÁRIA</span>
+          <span style="color: var(--emerald);">DISPATCH: sentinelai.oficial@gmail.com</span>
           <span>•</span>
-          <span>WHATSAPP END-TO-END</span>
+          <span>ENCRYPTED INTAKE</span>
           <span>•</span>
-          <span style="color: var(--emerald);">INITIATE UPLINK ➔</span>
+          <span style="color: var(--emerald);">ABRIR TERMINAL DE BRIEFING ➔</span>
         </div>
-      </a>
+      </div>
 
       <!-- MODULE 04: YOUTUBE SATELLITE -->
       <a href="https://www.youtube.com/@SentinelAI_Oficial" target="_blank" rel="noopener noreferrer" 
@@ -709,7 +848,7 @@
       </div>
       <div class="terminal-body" id="term-log">
         <div class="terminal-line highlight">[STARK-CORE]: Inicializando subsistemas do Sentinel AI...</div>
-        <div class="terminal-line success">[AUTH]: Conectado ao cluster com sucesso. Criptografia SHA-256 ativa.</div>
+        <div class="terminal-line success">[DISPATCH]: Gateway configurado para sentinelai.oficial@gmail.com</div>
         <div class="terminal-line">[TELEMETRY]: 16 nós de vídeo sincronizados na nuvem do Google.</div>
         <div class="terminal-line success">[STATUS]: Todos os 4 módulos operando em capacidade total.</div>
       </div>
@@ -728,6 +867,43 @@
       </p>
     </footer>
 
+  </div>
+
+  <!-- STARK DISPATCH MODAL -->
+  <div id="dispatch-modal" class="modal-backdrop" onclick="closeModalOnBackdrop(event)">
+    <div class="dispatch-window">
+      <div class="dispatch-header">
+        <span>// TRANSMIT ENCRYPTED BRIEFING // DISPATCH</span>
+        <button class="close-modal-btn" onclick="closeDispatchModal()">✕</button>
+      </div>
+      <form class="dispatch-body" id="dispatch-form" onsubmit="handleDispatchSubmit(event)">
+        <div class="field-group">
+          <label class="field-label">&gt; CALLSIGN / NOME OU EMPRESA</label>
+          <input type="text" id="disp-name" class="field-input" required placeholder="Ex: Tech Corp / Rodrigo Silva" autocomplete="off">
+        </div>
+        <div class="field-group">
+          <label class="field-label">&gt; E-MAIL CORPORATIVO PARA RETORNO</label>
+          <input type="email" id="disp-email" class="field-input" required placeholder="contato@empresa.com" autocomplete="off">
+        </div>
+        <div class="field-group">
+          <label class="field-label">&gt; ESCOPO DO PROJETO</label>
+          <select id="disp-scope" class="field-select">
+            <option value="Agentes Autônomos de IA">Implantação de Agentes Autônomos de IA</option>
+            <option value="Infraestrutura Cloud & DevOps">Infraestrutura em Nuvem (AWS / Azure / GCP)</option>
+            <option value="Hardening & Cibersegurança">Hardening de Segurança & Proteção de Sistemas</option>
+            <option value="Automação de Processos Empresariais">Automação de Processos & Esteira de Dados</option>
+            <option value="Outro Projeto Estratégico">Outro Projeto Estratégico Especial</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">&gt; RESUMO DO BRIEFING / ORÇAMENTO</label>
+          <textarea id="disp-msg" class="field-textarea" required placeholder="Descreva brevemente a sua necessidade ou objetivo corporativo..."></textarea>
+        </div>
+        <button type="submit" id="disp-btn" class="dispatch-submit-btn">
+          <span>[ TRANSMITIR BRIEFING // ENVIAR ]</span>
+        </button>
+      </form>
+    </div>
   </div>
 
   <!-- HUD Toast Feedback -->
@@ -810,7 +986,6 @@
     function drawRadar() {
       ctx.clearRect(0, 0, width, height);
 
-      // Connect nodes near mouse
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
         p.x += p.vx;
@@ -826,7 +1001,6 @@
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Distance to mouse
         const dx = mouse.x - p.x;
         const dy = mouse.y - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -879,9 +1053,9 @@
       const time = new Date().toLocaleTimeString();
 
       if (cmd === 'ping') {
-        log.innerHTML += `<div class="terminal-line">[${time}] &gt; PINGING GOOGLE API CLUSTER... LATENCY: 11.4ms (PERFECT)</div>`;
+        log.innerHTML += `<div class="terminal-line">[${time}] &gt; PINGING GOOGLE CLUSTER... LATENCY: 11.2ms (STABLE)</div>`;
       } else if (cmd === 'status') {
-        log.innerHTML += `<div class="terminal-line success">[${time}] &gt; STARK ARCHITECTURE OPERATIONAL // 0 MEMORY LEAKS // 100% UPTIME</div>`;
+        log.innerHTML += `<div class="terminal-line success">[${time}] &gt; SENTINEL CORE ONLINE // GATEWAY: sentinelai.oficial@gmail.com</div>`;
       }
       log.scrollTop = log.scrollHeight;
     }
@@ -892,11 +1066,90 @@
       const url = "https://sentinelaioficial-dev.github.io/";
       navigator.clipboard.writeText(url).then(() => {
         const toast = document.getElementById('hud-toast');
+        document.getElementById('toast-text').innerText = 'URL COPIADA COM SUCESSO';
         toast.classList.add('active');
         const log = document.getElementById('term-log');
         log.innerHTML += `<div class="terminal-line alert">[LINK]: URL corporativa copiada com sucesso para o clipboard.</div>`;
         log.scrollTop = log.scrollHeight;
         setTimeout(() => toast.classList.remove('active'), 2500);
+      });
+    }
+
+    // --- STARK DISPATCH MODAL HANDLERS ---
+    const modal = document.getElementById('dispatch-modal');
+
+    function openDispatchModal() {
+      playConfirmBeep();
+      modal.classList.add('open');
+      const log = document.getElementById('term-log');
+      log.innerHTML += `<div class="terminal-line highlight">[MODAL]: Terminal de Briefing Seguro Aberto.</div>`;
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function closeDispatchModal() {
+      playBeep(440, 0.04);
+      modal.classList.remove('open');
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target === modal) {
+        closeDispatchModal();
+      }
+    }
+
+    function handleDispatchSubmit(e) {
+      e.preventDefault();
+      playConfirmBeep();
+
+      const btn = document.getElementById('disp-btn');
+      const name = document.getElementById('disp-name').value;
+      const email = document.getElementById('disp-email').value;
+      const scope = document.getElementById('disp-scope').value;
+      const msg = document.getElementById('disp-msg').value;
+
+      btn.disabled = true;
+      btn.innerHTML = `<span>[ CRIPTOGRAFANDO E TRANSMITINDO... ]</span>`;
+
+      // Envio via FormSubmit AJAX para sentinelai.oficial@gmail.com
+      fetch("https://formsubmit.co/ajax/sentinelai.oficial@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `[SENTINEL AI BRIEFING] Novo Projeto: ${scope} (${name})`,
+          Nome_Empresa: name,
+          Email_Retorno: email,
+          Escopo_Projeto: scope,
+          Mensagem_Briefing: msg
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        btn.innerHTML = `<span style="color: var(--emerald);">[ BRIEFING TRANSMITIDO COM SUCESSO ]</span>`;
+        const log = document.getElementById('term-log');
+        log.innerHTML += `<div class="terminal-line success">[TRANSMISSION OK]: Briefing de ${name} despachado para sentinelai.oficial@gmail.com!</div>`;
+        log.scrollTop = log.scrollHeight;
+
+        const toast = document.getElementById('hud-toast');
+        document.getElementById('toast-text').innerText = 'BRIEFING TRANSMITIDO COM SUCESSO';
+        toast.classList.add('active');
+
+        setTimeout(() => {
+          modal.classList.remove('open');
+          btn.disabled = false;
+          btn.innerHTML = `<span>[ TRANSMITIR BRIEFING // ENVIAR ]</span>`;
+          document.getElementById('dispatch-form').reset();
+          toast.classList.remove('active');
+        }, 2000);
+      })
+      .catch(error => {
+        // Fallback para mailto se houver bloqueio de rede
+        window.location.href = `mailto:sentinelai.oficial@gmail.com?subject=Briefing%20Sentinel%20AI%20-%20${encodeURIComponent(scope)}&body=Nome:%20${encodeURIComponent(name)}%0AEmail:%20${encodeURIComponent(email)}%0AMensagem:%20${encodeURIComponent(msg)}`;
+        closeDispatchModal();
+        btn.disabled = false;
+        btn.innerHTML = `<span>[ TRANSMITIR BRIEFING // ENVIAR ]</span>`;
       });
     }
   </script>
